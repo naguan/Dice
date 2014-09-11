@@ -1,12 +1,28 @@
+import processing.core.*; 
+import processing.data.*; 
+import processing.event.*; 
+import processing.opengl.*; 
+
+import java.util.HashMap; 
+import java.util.ArrayList; 
+import java.io.File; 
+import java.io.BufferedReader; 
+import java.io.PrintWriter; 
+import java.io.InputStream; 
+import java.io.OutputStream; 
+import java.io.IOException; 
+
+public class Dice extends PApplet {
+
 Die one;
 Die two;
 int total = 0;
-void setup()
+public void setup()
 {
   size(140, 140);
   noLoop();
 }
-void draw()
+public void draw()
 {
   total = 0;
   background(0);
@@ -17,7 +33,7 @@ void draw()
   fill(255);
   text("Total roll is " + total, 35, 30);
 }
-void mousePressed()
+public void mousePressed()
 {
   redraw(); 
 }
@@ -32,7 +48,7 @@ class Die //models one single dice cube
       myY = y;
     }
   }
-  void roll()
+  public void roll()
   {
     fill((int)(Math.random()*256),(int)(Math.random()*256),(int)(Math.random()*256));
     rect(myX, myY, 50, 50);
@@ -86,6 +102,15 @@ class Die //models one single dice cube
       ellipse(myX+10, myY+25, 10, 10);
       ellipse(myX+40, myY+25, 10, 10);
       total = total + 6;
+    }
+  }
+}
+  static public void main(String[] passedArgs) {
+    String[] appletArgs = new String[] { "Dice" };
+    if (passedArgs != null) {
+      PApplet.main(concat(appletArgs, passedArgs));
+    } else {
+      PApplet.main(appletArgs);
     }
   }
 }
